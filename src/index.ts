@@ -17,9 +17,9 @@ const verifyFile = async (filePath: string) => {
   const options = await resolveConfig(filePath);
   const fileContents = readFileSync(filePath).toString();
   const result = check(fileContents, options || {});
-  
-  console.log(filePath, options, fileContents, result)
-  
+
+  console.log(filePath, options, fileContents, result);
+
   return result;
 };
 
