@@ -16,9 +16,16 @@ import { readFileSync } from "fs";
 const verifyFile = async (filePath: string) => {
   const options = await resolveConfig(filePath);
   const fileContents = readFileSync(filePath).toString();
-  const result = check(fileContents, { ...options, filepath: filePath });
-
-  return result;
+  try {
+    return check(fileContents, { ...options, filepath: filePath });
+  } catch (error) {
+    // skip on unrecognized file
+    if (error.message.includes("No parser could be inferred for file")) {
+      return true;
+    } else {
+      throw error;
+    }
+  }
 };
 
 export default async function prettier() {
