@@ -16,8 +16,11 @@ import { readFileSync } from "fs";
 const verifyFile = async (filePath: string) => {
   const options = await resolveConfig(filePath);
   const fileContents = readFileSync(filePath).toString();
-
-  return check(fileContents, options || {});
+  const result = check(fileContents, options || {});
+  
+  console.log(filePath, options, fileContents, result)
+  
+  return result;
 };
 
 export default async function prettier() {
@@ -28,7 +31,7 @@ export default async function prettier() {
     const isFileOkay = await verifyFile(path);
     if (!isFileOkay) {
       fail(
-        `{path} wasn't formatted with Pretter. Check if you have husky setup, as this should've been done automatically.`
+        `We found file (\`${path}\`) that wasn't formatted with Pretter. Check if you have husky setup properly, as this should've been done automatically.`
       );
       break;
     }
