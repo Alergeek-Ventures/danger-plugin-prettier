@@ -7,7 +7,7 @@ export declare function fail(message: string): void;
 export declare function markdown(message: string): void;
 
 import { check, resolveConfig } from "prettier";
-import { readFileAsync } from "fs";
+import { readFileSync } from "fs";
 
 /**
  * Check if code was prettier-formatted
@@ -15,7 +15,7 @@ import { readFileAsync } from "fs";
 
 const verifyFile = async (filePath: string) => {
   const options = await resolveConfig(filePath);
-  const fileContents = await readFileAsync(filePath);
+  const fileContents = readFileSync(filePath).toString();
 
   return check(fileContents, options || {});
 };
