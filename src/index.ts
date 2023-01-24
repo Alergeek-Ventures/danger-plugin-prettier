@@ -36,7 +36,7 @@ export default async function prettier() {
     const isFileOkay = await verifyFile(path);
     if (!isFileOkay) {
       fail(
-        `We found file (\`${path}\`) that wasn't formatted with Pretter. Check if you have husky setup properly, as this should've been done automatically.`
+        `We found file (\`${path}\`) that wasn't formatted with Prettier. Check if you have husky setup properly, as this should've been done automatically.`
       );
       break;
     }
